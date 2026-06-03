@@ -14,6 +14,7 @@ SELECT
     SUM(y."AlightCount") AS "Total Alights",
     MAX(y."AlightCount") AS "Maximum Alights at a Stop",
 
+    AVG(y."TotalCount") AS "Average Passenger Load",
     MAX(y."Median Passenger Load") AS "Median Passenger Load",
     MAX(y."TotalCount") AS "Maximum Passenger Load",
 
@@ -44,7 +45,9 @@ FROM (
 
             r.RouteShortName AS "Route Short Name",
             r.RouteName AS "Route Name",
+
             d.DirectionName AS "Direction",
+
             tp.TripName AS "Trip",
 
             tp.BoardCount AS "BoardCount",
