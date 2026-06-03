@@ -15,6 +15,7 @@ SELECT
     MAX(y."Actual Runtime (Min)") AS "Maximum Actual Runtime (Min)",
 
     AVG(y."Runtime Delta (Min)") AS "Average Runtime Delta (Min)",
+    MAX(y."Median Runtime Delta (Min)") AS "Median Runtime Delta (Min)",
     MAX(y."Runtime Delta (Min)") AS "Maximum Runtime Delta (Min)",
 
     COUNT(*) AS "Observation Count"
@@ -36,7 +37,22 @@ FROM (
                 x."Scheduled Trip Start Time",
                 x."Scheduled Trip End Time",
                 x."Scheduled Runtime (Min)"
-        ) AS "Median Actual Runtime (Min)"
+        ) AS "Median Actual Runtime (Min)",
+
+        PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY x."Runtime Delta (Min)")
+        OVER (
+            PARTITION BY
+                x."Month Number",
+                x."Month Name",
+                x."Day of Week",
+                x."Route Short Name",
+                x."Route Name",
+                x."Direction",
+                x."Trip Name",
+                x."Scheduled Trip Start Time",
+                x."Scheduled Trip End Time",
+                x."Scheduled Runtime (Min)"
+        ) AS "Median Runtime Delta (Min)"
 
     FROM (
         SELECT
