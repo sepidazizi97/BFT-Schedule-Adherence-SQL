@@ -9,14 +9,11 @@ SELECT
     y."Trip",
 
     SUM(y."BoardCount") AS "Total Boards",
-    AVG(y."BoardCount") AS "Average Boards per Stop Event",
     MAX(y."BoardCount") AS "Maximum Boards at a Stop",
 
     SUM(y."AlightCount") AS "Total Alights",
-    AVG(y."AlightCount") AS "Average Alights per Stop Event",
     MAX(y."AlightCount") AS "Maximum Alights at a Stop",
 
-    AVG(y."TotalCount") AS "Average Passenger Load",
     MAX(y."Median Passenger Load") AS "Median Passenger Load",
     MAX(y."TotalCount") AS "Maximum Passenger Load",
 
